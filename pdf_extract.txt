@@ -1,0 +1,1205 @@
+--- PAGE 76 ---
+  
+  
+151  
+  
+    
+investing in e-commerce infrastructure, adding virtual try-on tools, improving mobile app 
+capabilities, and using social commerce.  
+Decision support:   
+The observed decline in foot traffic in physical stores, as well as the increasing significance 
+of online channels in increasing sales, support the proposal to improve the digital shopping 
+experience. Adidas can efficiently reach and attract customers by concentrating on 
+omnichannel strategies and digital innovation, allowing for data-driven decision-making to 
+optimize sales channels.  
+Tracking metrics such as online sales, website traffic, conversion rates, and customer 
+happiness can assist Adidas in determining the efficiency of its digital initiatives and 
+identifying areas for improvement.  
+• Adapting to changing consumer preferences due to changes in consumer spending   
+Justification:   
+Changes in consumer behavior, such as a preference for athleisure wear and a focus on health 
+and wellbeing, require Adidas to adapt its product offerings and marketing techniques. Adidas 
+can stay relevant to shifting consumer tastes by creating sustainable and adaptable products, 
+establishing collaborations and limited editions, personalizing marketing messaging, and 
+growing digital community participation.  
+Further, targeted marketing initiatives help Adidas reach and attract certain customer 
+categories, increasing brand exposure, consideration, and sales.  
+Decision support:   
+The recommendation for adapting to changing consumer preferences is supported by an 
+understanding of changing market conditions and the significance of meeting customer 
+expectations. Adidas can maintain its competitiveness and promote sales growth by 
+improving products and marketing tactics, allowing for more informed decision-making in 
+order to capture market opportunities and increase brand loyalty.  
+Overall, these recommendations are supported by Adidas' recognized problems which include 
+supply chain interruptions, changes in customer behavior, and the transition to online buying.  
+--- PAGE 77 ---
+  
+  
+152  
+  
+    
+By tackling these difficulties with tailored methods, Adidas can promote informed 
+decisionmaking and establish themselves for long-term success in the retail market.  
+CHAPTER 05  
+VALIDATION  
+  
+This section covers how I evaluated the performance and the reliability of the predictive 
+models and the test cases of the dashboard web app.   
+Model Validation Approach   
+Evaluation Methodology  
+Both models use the same evaluation framework:  
+• Metrics Calculated:  
+ MAE (Mean Absolute Error)  
+ RMSE (Root Mean Squared Error)  
+ MAPE (Mean Absolute Percentage Error)  
+  
+• Evaluation Process:  
+ Temporal train/test split (no random splitting)  
+ Metrics calculated on held-out recent data  
+ Identical visual comparison of actual vs predicted  
+  
+ 
+  
+• Key Points on Model Evaluation Periods:  
+
+--- PAGE 78 ---
+  
+  
+153  
+  
+    
+Prophet Model Evaluation: The historical performance metrics (MAE, RMSE, MAPE) for the 
+Prophet model were calculated by training the model on the historical data excluding the last 
+3 months and then evaluating its predictions against those last 3 months.  
+Random Forest Model Evaluation: The historical performance metrics for the Random Forest 
+Regressor were calculated by training the model on the historical data excluding the last 20% 
+and then evaluating its predictions against that last 20% of the data.  
+Implication: Because the test periods used for calculating these evaluation metrics are 
+different (last 3 months vs. last 20% of data), the metrics for the two models are not directly 
+comparable over the exact same historical time window.  
+For the purpose of evaluating the historical performance of the predictive models, a train-test 
+split approach was utilized. The Prophet model's evaluation metrics (MAE, RMSE, MAPE) 
+were calculated based on forecasting the last 3 months of the historical data.  
+In contrast, the Random Forest Regressor's evaluation metrics were derived from predicting 
+the last 20% of its respective historical data. It is important to note that due to this difference 
+in the test set time periods, the evaluation metrics provided for the two models are not 
+directly comparable in a strict, like-for-like manner. Each model's metrics reflect its 
+performance over a distinct portion of the historical timeline.  
+  
+Example:   
+Model evaluation metrics for overall total sales:  
+Prophet Model:   
+ 
+  
+Random forest Regressor:  
+
+--- PAGE 79 ---
+  
+  
+154  
+  
+    
+ 
+  
+To assess the performance of the models in predicting Overall Total Sales, three common 
+evaluation metrics were used: MAE, RMSE, and MAPE. These metrics help determine how 
+close the predicted values are to the actual sales data.  
+1. Mean Absolute Error (MAE)  
+MAE measures the average absolute difference between predicted and actual values, without 
+considering the direction of the error.  
+On average, how much did the model's predictions differ from the actual sales figures (in 
+dollar terms)?  
+Interpretation: Lower MAE = Better accuracy.  
+• Results:  
+ Prophet: $1,362,710.68  
+ Random Forest: $1,279,294.73  
+ Conclusion: Random Forest had a lower MAE, meaning its predictions were closer to 
+actual values by an average of $83,415.95 compared to Prophet.  
+2. Root Mean Squared Error (RMSE)  
+RMSE is similar to MAE but squares the errors before averaging and then takes the square 
+root. This means larger errors are penalized more heavily.  
+In simple terms: It shows how significant the prediction errors were, with more weight given 
+to large mistakes.  
+Interpretation: Lower RMSE = Fewer large errors.  
+  
+  
+• Results:  
+
+--- PAGE 80 ---
+  
+  
+155  
+  
+    
+ Prophet: $1,541,616.76  
+ Random Forest: $1,506,394.65  
+ Conclusion: Random Forest again performed better, with a slightly lower RMSE, 
+indicating it handled large errors more effectively.  
+  
+3. Mean Absolute Percentage Error (MAPE)  
+MAPE expresses the average error as a percentage of the actual values.  
+In simple terms: It shows how far off the predictions were, on average, in percentage terms.  
+Interpretation: Lower MAPE = Better relative accuracy.  
+• Results:  
+ Prophet: 17.88%  
+ Random Forest: 16.36%  
+ Conclusion: Random Forest achieved a 1.52 percentage point improvement over 
+Prophet, showing more accurate predictions in relative terms.  
+Test Cases  
+Test  
+Case  Description  Input/Test steps  Expected Output  Status  
+TC01  User login with valid 
+credentials  Username +  
+Password  Redirect to dashboard  Pass  
+TC02  User register to access the 
+system  Username +  
+Password +  
+Email  Registration  
+Successful! Please  
+Login  Pass  
+TC03  Invalid login attempt  Wrong password  Error message  Pass  
+TC04  Upload valid Excel sales file  Adidas.xlsx  Data loaded 
+successfully  Pass  
+TC05  Upload invalid file format  image.jpg  Error message  Pass  
+--- PAGE 81 ---
+  
+  
+156  
+  
+    
+TC06  Upload corrupted Excel file  Corrupted.xlsx  Error message  Pass  
+ 
+TC07  Filter by Year  2020/2021  Filtered data  Pass  
+TC08  Filter by product category  Select "Men’s  
+Apparel”  Filtered visualization  Pass  
+TC09  Filter by month  Select “January”  Month-specific data  Pass  
+TC10  Filter by Retailer  Select  
+“Walmart”  Walmart specific data   Pass  
+TC11  Filter by region  Select “West”  West – specific data  Pass  
+TC12  Reset all filters  Click "Reset  
+Filters"  Default view restored  Fail  
+TC13  Retailer sales bar chart  Apply filters  Updated chart  Pass  
+TC14  Time series line chart  Change time 
+aggregation  Smooth line graph  Pass  
+TC15  State-wise sales dual-axis 
+chart  Hover  
+interaction  Tooltip with values  Pass  
+TC16  Treemap region/city view  Click on region  Drill-down works  Pass  
+TC17  Product performance chart  Apply filters  Updated chart  Pass  
+TC18  Sales distribution pie chart  Apply filters  Updated chart  Pass  
+TC19  Dashboard header  Load the 
+dashboard  Logo + title displayed 
+correctly  Pass  
+TC20  KPI metrics formatting  Apply currency  
+filters  "$12,345.67" format 
+with 2 decimal places  Pass  
+TC21  Last updated timestamp  Refresh data  Timestamp updates to 
+current time  Pass  
+--- PAGE 82 ---
+  
+  
+157  
+  
+    
+TC22  Sidebar filter persistence  Reload page 
+after setting 
+filters  Filters retain state  Pass  
+TC23  Dark mode compatibility  Toggle dark mode All charts adapt color 
+scheme  Pass  
+TC24  KPI metrics formatting  Apply currency  
+filters  "$12,345.67" format 
+with 2 decimal places  Pass  
+ 
+TC25  Missing data points for charts  Filter to sparse 
+time range  Line breaks with gaps  Pass  
+TC26  Hover tooltip values  Hover over Q1  
+2021 point  Shows exact sales:  
+"$1.2M"  Pass  
+TC27  Color contrast on charts  Check label 
+readability  White text on dark 
+colors  Pass  
+TC28  Secondary axis toggle  Click "Hide  
+Units Sold"  Only sales bars 
+remain  Pass  
+TC29  Cross-chart filtering  Click "Amazon"  
+in retailer chart  All other charts filter 
+to Amazon  Fail  
+TC30  Brush selection in time series  Drag-select Jan-  
+Mar 2024  All charts zoom to 
+range  Pass  
+TC31  Legend toggle  Click "Men's 
+Apparel" in 
+legend  Hides category across 
+all charts  Pass  
+TC32  Reset zoom button  Click after 
+zooming  Returns to default 
+view    
+TC33  Cross-chart filtering  Click "Amazon"  
+in retailer chart  All other charts filter 
+to Amazon  Pass  
+--- PAGE 83 ---
+  
+  
+158  
+  
+    
+TC34  PNG export of chart  Click "Export as 
+PNG" on 
+treemap  Image matches screen 
+view  Pass  
+TC35  CSV data matches chart  Export retailer 
+sales CSV  Numbers equal hover 
+tooltip values  Pass  
+TC36  Print layout  Browser print 
+preview  Charts fit page, no 
+cutoffs  Pass  
+TC37  Screen reader support  Navigate with  
+NVDA  Announces chart 
+types + summaries  Pass  
+TC38  Keyboard navigation  Tab through  
+filters + charts  Focus rings visible  Pass  
+ 
+TC39  Colorblind mode  Enable 
+deuteranopia 
+simulation  Charts use patterns + 
+safe palette  Fail  
+TC40  Move to a different page  Select  
+“Predictive 
+analysis”  Redirects to predictive 
+analysis page  Pass  
+TC41  Prophet sales forecast  3-month horizon  Future Trend line   Pass  
+TC42  Prophet sales forecast  6-month horizon  Future Trend line   Pass  
+TC43  Prophet sales forecast  12-month horizon Future Trend line   Pass  
+TC44  Select metric to forecast in 
+predictive analysis page  Select “Units 
+sold”  Units sold forecasts 
+related data  Pass  
+TC45  Change forecast aggregation 
+level   Select “By 
+product”  Updated data with 
+forecasts by product  Pass  
+--- PAGE 84 ---
+  
+  
+159  
+  
+    
+TC46  Confidence Interval  
+Adjustment  Set to 90%  Wider prediction 
+bands  Pass  
+TC47  Forecast comparison tool  Select to compare 
+“Men’s Apparel 
+and  
+Women’s  
+apparel”  Updated forecast chart 
+related to men’s 
+apparel and women.   Pass  
+TC48  Model Evaluation change  Select “Total 
+sales” in 
+predictive 
+analysis   The model evaluation 
+updates (MAE,  
+RMSE)  Pass  
+TC49  Moving to a Advanced 
+predictive analysis page  Select  
+“Advanced  
+analysis”  Redirects to that page  Pass  
+TC50  Changing metric in random 
+forecast  Select  
+“Operational 
+profit”  Updated charts and 
+data related to  Pass  
+   operational profits 
+forecasts   
+TC51  Change forecast aggregation 
+level in random forest page  Select “By 
+product”  Updated data with 
+forecasts by product  Pass  
+TC52  Feature importance for 
+random forest model  Selecting a 
+particular filter  The charts get 
+updated  Pass  
+TC53  Change random forest 
+forecast aggregation level   Select “By 
+product”  Updated data with 
+forecasts by product  Pass  
+TC54  Model parameters  
+Adjustment  Set to 90%  Wider prediction 
+bands  Pass  
+--- PAGE 85 ---
+  
+  
+160  
+  
+    
+TC55  No data matching filters  Impossible data 
+range  Empty charts  Pass  
+TC56  Download retailer sales CSV   Click download 
+button  CSV file generated  Pass  
+TC57  Download monthly sales  
+CSV   Click download 
+button  CSV file generated  Pass  
+TC58  Download raw data CSV   Click download 
+button  CSV file generated  Pass  
+TC59  Download Prophet forecasts  
+sales CSV   Click download 
+button  CSV file generated  Pass  
+TC60  Download Random Forest 
+forecast sales CSV   Click download 
+button  CSV file generated  Pass  
+  
+  
+  
+  
+  
+CHPATER 6  
+CONCLUSION & FUTURE WORK  
+  
+In conclusion, managing the security challenges in big data within organizations is important 
+for organizations to secure sensitive information, maintain regulatory compliance, and retain 
+stakeholder trust. Unauthorized access, data breaches and data volume had the most 
+significant impact on organizations according to the survey findings and interview. To 
+effectively tackle these challenges, organizations must take a comprehensive strategy that 
+includes strategies such as strong access controls, encryption, data governance, and incident 
+response mechanisms.  
+--- PAGE 86 ---
+  
+  
+161  
+  
+    
+Key solutions included advanced encryption techniques, access control mechanisms, training 
+for employees, data masking techniques and utilizing extensive security frameworks. By 
+utilizing the strategies and recommendation recommended, organizations can effectively 
+mitigate the security challenges in big data and also establish a secure big data environment 
+within the organization.   
+In the context of the development of the dashboard web app, several meaningful future work 
+directions include:   
+1. Enhanced Predictive Modeling  
+• Implement more advanced machine learning models like XGBoost, LSTM neural 
+networks, or ensemble methods to potentially improve forecasting accuracy  
+• Develop hybrid models that combine the strengths of statistical approaches (like Prophet) 
+with machine learning techniques  
+• Incorporate external variables like economic indicators, weather data, or marketing 
+campaigns that may affect sales  
+  
+2. Real-time Analytics Integration  
+• Develop a real-time data pipeline to analyze streaming sales data as it comes in  
+• Implement automated anomaly detection to flag unusual sales patterns immediately  
+• Create alert systems for when sales deviate significantly from forecasts  
+3. Expanded Business Intelligence Features  
+• Add customer segmentation analysis to identify high-value customer groups  
+• Incorporate inventory optimization recommendations based on sales forecasts • 
+Develop price optimization models to suggest ideal pricing strategies  
+  
+4. Improved User Experience  
+• Implement natural language processing to allow users to query the dashboard using plain 
+English  
+• Add automated report generation that executives can schedule and receive via email  
+• Develop mobile-friendly versions of the dashboard for on-the-go access  
+--- PAGE 87 ---
+  
+  
+162  
+  
+    
+  
+5. Deployment Enhancements  
+• Containerize the application using Docker for easier deployment  
+• Implement user authentication and role-based access controls  
+• Set up automated testing and continuous integration/continuous deployment (CI/CD) 
+pipelines  
+  
+6. Data Expansion  
+• Incorporate additional data sources like social media sentiment, competitor pricing, or 
+supply chain information  
+• Add more granular geographic data for hyper-local sales analysis  
+• Include product return data to analyze the full customer lifecycle  
+  
+7. Advanced Visualization  
+• Implement augmented reality (AR) visualizations for immersive data exploration  
+• Add geospatial mapping capabilities for location-based insights  
+• Develop interactive what-if scenario tools for business planning  
+REFERENCES  
+AL-SAI, Z., ABDULLAH, R. & HUSIN, H. (2019) Big Data Impacts and Challenges: A 
+Review. ResearchGate. [Online] Available from: 
+https://www.researchgate.net/publication/332543555_Big_Data_Impacts_and_Challenges_A 
+_Review [Accessed: 02/02/2025]   
+ANALYTIXLABS (2023) Random Forest Regression — How it Helps in Predictive 
+Analytics? AnalytixLabs. [Online] Available from: 
+https://medium.com/@byanalytixlabs/random-forest-regression-how-it-helps-in-
+predictiveanalytics-01c31897c1d4  [Accessed: 20/05/2025]  
+AWATI, R. Advanced Encryption Standard (AES) TechTarget. [Online] Available from: 
+https://www.techtarget.com/searchsecurity/definition/Advanced-Encryption-Standard  
+[Accessed: 14/05/2025]  
+--- PAGE 88 ---
+  
+  
+163  
+  
+    
+AYESH, S. (2025) Interview with S. Ayesh on 27th March 2025. [Recording in possession of 
+author]   
+BHATTACHARYA, A. (2024) Big Data - Data Encryption in Big data. ENCRYPTION 
+CONSULTING. [Online] Available from: 
+https://www.encryptionconsulting.com/dataprotection-in-big-data-using-encryption/  
+[Accessed: 14/05/2025]   
+BENJELLOUN, Z, F & LAHCEN, A, A. (2015) Big Data Security: Challenges, 
+Recommendations, and Solutions. ResearchGate. [Online] Available from: 
+https://www.researchgate.net/publication/278962714_Big_Data_Security_Challenges_Reco 
+mmendations_and_Solutions  [Accessed: 04/02/2025]  
+BIGELOW, J, S. (2021) 4 Best Practices for Big Data Security in Cloud Computing.  
+TechTarget. [Online] Available from:  
+https://www.techtarget.com/searchcloudcomputing/tip/4-best-practices-for-big-data-
+securityin-cloud-computing  [Accessed: 12/02/2025]   
+COBB, M. (2022) data masking. TechTarget. [Online] Available from:  
+https://www.techtarget.com/searchsecurity/definition/data-masking  [Accessed: 16/05/2025]  
+DUTTA, S. (2024) Big Data Security: Advantages, Challenges, and Best Practices. Turing. 
+[Online] Available from: https://www.turing.com/resources/big-data-security#2.-effectiveuser-
+access-control  [Accessed: 14/05/2024]   
+ELEVONDATA (2023) The Top Challenges of Big Data: Volume, Velocity, Variety, and 
+Veracity. Elevondata.  [Online] Available from: https://www.linkedin.com/pulse/topchallenges-
+big-data-volume-velocity-variety-
+veracityelevondata#:~:text=Volume%20is%20one%20of%20the,%2C%20sensors%2C%20an
+d%20tr ansactional%20systems . [Accessed: 02/05/2025]    
+GAUR, C. (2023) Big Data Security Tools and Management Best Practices . [Online]  
+December 4th 2023. Available from: https://www.xenonstack.com/blog/big-data-security  
+[Accessed: 15th April 2025]   
+--- PAGE 89 ---
+  
+  
+164  
+  
+    
+GEEKSFORGEEKS. (2024) Time Series Analysis Using Facebook Prophet. GeeksforGeeks. 
+[Online] Available from: https://www.geeksforgeeks.org/time-series-analysis-usingfacebook-
+prophet/ [Accessed: 17/05/2025]  
+GEORGE, T. (2021) Mixed Method Research | Definition, Guide & Examples. Scribbr.  
+[Online] Available from: https://www.scribbr.com/methodology/mixed-methods-research/  
+[Accessed: 21/04/2025]   
+GILLIS, A (2021) principle of least privilege (POLP). TechTarget. [Online] Available from:  
+https://www.techtarget.com/searchsecurity/definition/principle-of-least-privilege-POLP  
+[Accessed: 03/05/2025]   
+GILLIS, A. (2024) What is role-based access control (RBAC)? TechTarget. [Online] 
+Available from: https://www.techtarget.com/searchsecurity/definition/role-based-
+accesscontrol-RBAC  [Accessed: 14/04/2025]  
+JANSEN, D. (2023) Research Philosophy & Paradigms. GRADCOACH. [Online] Available 
+from: https://gradcoach.com/research-philosophy/  [Accessed: 10/05/2025]  
+JUMBOBLOCKCHAIN. (2023) Blockchain and Big Data: Enhancing Data Security and 
+Privacy. [Online] May 12th 2023. Available from: https://www.linkedin.com/pulse/blockchain-
+big-data-enhancing-security-privacyjumbochainglobal/  [Accessed: 15th May 2025]   
+KUMAR, D. (2021) Top 7 Big Data Security Issues and Their Solutions. Hevo. [Online] 
+Available from: https://hevodata.com/learn/big-data-security/#et  [Accessed: 01/05/2025]   
+LAWTON, G. (2022) DataOps. TechTarget. [Online] Available from:  
+https://www.techtarget.com/searchdatamanagement/definition/DataOps  [Accessed: 16/05/202]  
+LUTKEVICH, B. (2023) tokenization. TechTarget. [Online] Available from: 
+https://www.techtarget.com/searchsecurity/definition/tokenization  [Accessed: 14/05/2025]   
+MCKINSEY & COMPANY (2016) How companies are using big data and analytics.  
+MCKINSEY & COMPANY. [Online] Available from: 
+https://www.mckinsey.com/capabilities/quantumblack/our-insights/how-companies-areusing-
+big-data-and-analytics  [Accessed: 14/04/2025]   
+POUR, H, C. (2024) big data. TechTarget. [Online] Available form:  
+--- PAGE 90 ---
+  
+  
+165  
+  
+    
+https://www.techtarget.com/searchdatamanagement/definition/big-data   [Accessed: 
+29/04/2025]   
+SRIRAM, K, G. (2022) Security Challenges of Big Data Computing. ResearchGate . [Online] 
+Available from:  
+https://www.researchgate.net/publication/358226925_SECURITY_CHALLENGES_OF_BI 
+G_DATA_COMPUTING  [Accessed: 06/04/2025]   
+TECEZE (2024) Potential Impact of AI: Data Security Challenges. TECEZE. [Online] 
+Available from: https://teceze.com/potential-impact-of-aI-data-
+securitychallenges#:~:text=The%20Potential%20of%20AI%20in%20Data%20Security,-  
+AI%20holds%20great&text=Machine%20learning%20algorithms%20can%20glean,sensitive  
+%20information%20and%20potential%20vulnerabilities . [Accessed: 01/05/2025]  
+  
+  
+  
+  
+APPENDIX  
+  
+The source code for the Dashboard web app is available on GitHub  
+Dashboard web app source code: https://github.com/Senash13/Final-
+yearproject/tree/main/Dashboard%20web%20app    
+This repository contains all the code, templates, and resources required to run the app.  
+To run the app, clone the repository, create a Python virtual environment, install dependencies 
+via requirements.txt, and run app.py. The app will be accessible on http://localhost:5000.  
+  
+• Google form responses excel sheet:   
+https://1drv.ms/x/c/cbf9328fd5aa5a66/EYZG8Jb4YedAg19GvZsKacBCQ94HXlJbcchcqS91
+Wq7Lw   
+--- PAGE 91 ---
+  
+  
+166  
+  
+    
+Google form graphs   
+These are the additional graphs which were visualized the questions included in the survey.   
+ 
+  
+Interview transcript   
+Senash: Good afternoon, sir, thank you for participating for the interview  
+Mr Ayesh: Hi Senash  
+Senash: Hi sir so let’s start the interview   
+Mr Ayesh: Ok Ok sure, lets start   
+Senash: So the first question is are you aware of the term huh.. big data and could you explain 
+to me what big data in briefly?  
+My Ayesh: Yah so, big data is something like large, massive datasets which cannot be dealt 
+with traditional data management systems. These data sets can be structured, unstructured 
+data and also can be semi-structured data. So, in our organization, big data mainly allows us 
+to analyze large volumes of data, hmm, from various sources to gain valuable insights which 
+can be used for, hmm. business intelligence and also in decision making.  
+Senash: Ok so the next question is which forms of data are considered as the most sensitive in 
+your organization’s big data environment?  
+
+--- PAGE 92 ---
+  
+  
+167  
+  
+    
+Mr Ayesh: Basically, it is those financial data in the company and also the personal 
+information of employees would be the most sensitive in the big data environment.  
+Senash: Alright so has your organization experienced any data breaches as a security 
+challenge related to big data?   
+My Ayesh: No, in the last couple of months, we have not experienced any data breach in our 
+organization. However, if there is any, it can cause a serious damage to the us and will epxose 
+some confidential details as well.   
+Senash: So do you think data breaches is a big data challenge for organizations?   
+Mr Ayesh: Yah of course, it can be a very significant challenge, I would say, especially 
+organizations that deal with big data because all the sensitive information in the organization 
+will be lost. So yah, I see it as a challenge   
+Senash: Ok so the next question is have your organization faced incidents of unauthorized 
+access to big data?   
+Mr Ayesh: I mean, there have been few incidents like this, but they were not like serious 
+situations but as you said earlier this can be significant big data challenge as well when 
+comparing it with data breaches.  
+Senash: Ok sir so the next question is does your organization identify a lack of employee 
+awareness as a challenge in big data security?   
+Mr. Ayesh: I don’t think so. Hmm. It’s because in our organization we provide training for 
+employees regarding the organization practices as well provide awareness to big data security 
+as well. So, we do provide awareness to all parts of security that can affect the company and 
+not only regarding big data.   
+Senash:  So, do you think that organizations identify a lack of employee awareness as a 
+challenge in big data security?  
+Mr. Ayesh: Yah I mean it can be a big data challenge because if employees are not aware 
+about these in detail, it can be very dangerous. So for example, hmmm, if employees are 
+unaware of proper practices for managing sensitive data, such as huh.. encryption 
+--- PAGE 93 ---
+  
+  
+168  
+  
+    
+technologies, they may unintentionally expose data to unauthorized access or mishandle it, 
+resulting in big data security breaches. So yah, that could be another challenge.   
+This also reminds me of an incident which happened a few months ago where one of my 
+friends and also a employee at the top hierarchy accidently exposed data in our organization.  
+So yah, so there can be challenges like this.  
+Senash: Ohh Okay sir, so the next question is have your organization experienced compliance 
+issues related to the security of big data?  
+Mr. Ayesh: Sorry?..   
+Senash: have your organization experienced compliance issues related to the security of big 
+data?  
+Mr. Ayesh: No, not in LOLC because we are aware and follow the regulations very well. So, 
+if hmm overall, if we talk about compliance issues, it can be a big data challenge because 
+hmm, these regulations, which is in srilanka which is the The Personal Data Protection Act 
+No. 9 of 2022 ('PDPA') of Sri Lanka provide strict requirements for protecting sensitive data, 
+especially big data, and companies like us must follow them to avoid fines and any other 
+legal consequences.  
+Senash: Ok sir so the next question is huh, hmm what other big data security challenges have 
+been experienced by your organization? And can you please explain it briefly.  
+Mr. Ayesh: Yah so, if we talk about the data volume of big data it can be challenge, not just 
+for us but also for any organization that handles big data. So, what I mean is that the amount 
+of big data being generated is enormous, and maintaining, processing, and also analyzing 
+such vast amounts requires tremendous computational resources and storage capacity right?, 
+so yah so this can be challenge as well.   
+And also when talking about the data quality, ensuring data quality is a significant challenges 
+in big data analytics as well. So what I mean is that With vast volumes of data arriving from 
+diverse sources like different sources, there is a risk of mistakes and inconsistencies right?, so 
+these poor data quality can lead to poor insights which can affect any organization  
+Senash:: So, is there any other security challenge? I mean you can give an answer in general, 
+like in any organizations?  
+--- PAGE 94 ---
+  
+  
+169  
+  
+    
+Yah sure, so data privacy can be challenge as well. I say this because, huh, as organizations 
+collect and analyze massive volumes of data, maintaining data privacy and security becomes 
+critical and very challenging, right? So there can be concerns with unauthorized access and 
+data breaches as we talked about earlier, so yah.  
+Also, if we talk about the 3Vs of big data, the data variety can be a challenge as well. The 
+speed at which the data is generated and needs to be processed can be another challenge. In 
+my opinion, this is because real-time data processing and analytics may be needed for. 
+Hmmm, specific applications that requires computing power and streaming analytics 
+capabilities.  
+Senash: Ok sir,   
+Mr. Ayesh: Huh and also for organizations that use cloud-based big data platforms, ensuring 
+cloud security can be a challenge as well.  
+Senash: so from the challenges you have mentioned, what do you think is the most significant 
+security challenge with big data in your organization?   
+Mr. Ayesh: So in our organization, I would say that the challenge with data volume I talked 
+earlier, would be the most significant challenge among those other challenges and if we talk 
+about the most significant challenge in general, I think unauthorized access and maybe data 
+compliance and data breaches would one of the most significant challenge. In general right?  
+Senash: Ok so the next question is has your organization implemented encryption as a 
+mitigation strategy for big data security?  
+Mr. Ayesh: Of course, given the sensitivity of the data in our organization’s big data 
+environment, that includes all the financial data and all, huh this encryption measures such as 
+SSL/TLS  can help to protect the data from various threats, right? And also to ensure safety 
+while transferring data as well.   
+So we use passwords, biometrics and all as well so yah.   
+Senash: What do you think about more advanced encryption technqiues?  
+Mr. Ayesh: Yah so huh ….. techniques like AES and all huh, homographic which basically 
+use complex mathematical operations and symmetric encryptions can be the most innovative,  
+--- PAGE 95 ---
+  
+  
+170  
+  
+    
+I would say techniques that can be used as well. And also data at transit can be secure during 
+SSL and TLS while data t rest can then be secuired suing AES. Yah.   
+Senash: Alright. So hmm, the next question is does your organization implement data 
+masking techniques to enhance big data security?  
+Mr. Ayesh: Yah, hmmm, huh, we somewhat use data masking technique something like 
+generalization and all,  so overall this method basically hides the data by modifying it and 
+also while maintaining their usefulness, I would say, like for testing and analysis.   
+So, as I said earlier overall this technique will also help to mitigate those challenges that 
+involves those security threats, huh… which is related to big data.  
+Senash: Ok so the next one is, does your organization conduct regular audits as a strategy to 
+mitigate big data security challenges?  
+--- PAGE 96 ---
+   
+Mr. Ayesh:  
+171  
+  
+    
+Of course, obviously, we conduct regular audits, not just to identity and mitigate  
+those big data related challenges, and also conduct huh… compliance audits, and in fact 
+encryption audits as well so to ensure that we meet the regulations and standards, and also 
+security assessments huh, hmmm to identify the vulnerabilities in big data environments, I 
+would say.  
+Senash: Ok so the next question is does your organization provide employees with training on 
+best practices for big data security?  
+Mr. Ayesh: Yes, we do Senash.  
+Senash: How does it work sir.   
+Mr. Ayesh:  Yah so basically by providing training, the employees will be aware of these big 
+data security challenges and in case a data breach or some other threat occurs, they will 
+ready for it right?, like they will know what to do and how to do it.   
+So we provide regular training programs and all including online initiatives and. It also 
+reduce the human errors caused, like mistakes, like unauthorized access to big data. So yah 
+providing training will be strategy to minimize the security challenge relate to big data .  
+Senash: Ok sir so does your organization have a defined incident response plan for big data 
+security incidents?  
+Mr. Ayesh: Yah we do, so like when a big data breach or any security incident occur at 
+LOLC, the incident response plan will allow us to manage this security incident effectively 
+right?   
+Senash: Yah. And also what types of systems have you guys implemented   
+Mr. Ayesh: Hmm, we will be able to like make better decisions during a security incident, 
+and mitigate these security challenges, risks before it become a major, I mean, a series 
+incident.  
+And also for your question, we have implemented IDS and IPS respectfully and systems to 
+identify any security incidents.    
+--- PAGE 97 ---
+   
+Mr. Ayesh:  
+172  
+  
+    
+Senash: Ok sir, so the next question is has your organization implemented access controls as 
+a mitigation strategy for big data security?  
+Yes of course, we do. Not just in our organization and almost all of the  
+organizations that handles big data have implemented access controls. I say this, because, 
+access controls help to manage who has access to data, what actions they can do on it, and 
+under what conditions. So, over here we implement RBAC, which is role-based access 
+controls, yah so permissions are assigned to the employees huh depending on their roles and 
+duties inside the organization. Roles such as data analyst, data scientist and so on have been 
+defined and appropriate permissions have been assigned to each role. So yah.  
+And also we are using something called Multi-Factor Authentication, if you have heard of it. 
+So, basically it will give access to a user at LOLC after he goes through few security 
+measures.   
+  
+Senash: Ok sir, so the final question is there any other mitigation strategies or measures 
+implemented by your organization in order to mitigate the security challenges?   
+Mr. Ayesh: The other strategies used in LOLC where I work hmm, huh, hmmm,, huh the data 
+quality assessment tools like I just can’t remember the tool we use, but I would say we use 
+these tools to find and fix any inconsistencies, mistakes, and inaccuracies in big data sets. 
+We do, this to make sure their reliable and also to assure their reliability.  
+In general, I would think like there is something called a data governance framework, and 
+huh…….. anonymization techniques, huh, and advance analytics and machine learning 
+algorithms can be implemented to identify any big data security threat and all.. So I think 
+these, strategies and techniques will help to mitigate the big data security challenges.  
+And also when talking about these advanced techniques, this reminds me of the blockchain 
+technology as well.  
+Senash: Ok sir so that’s the … huh or one more question sir   
+Mr. Ayesh: Yah.  
+--- PAGE 98 ---
+   
+Mr. Ayesh:  
+173  
+  
+    
+Senash: So from the following you have mentioned, what specific strategies or technologies 
+has a significant impact in your organization to handle big data security challenges?   
+I would say in our organizations and also taking all the organizations that  
+manages big data into account, access controls and encryption would be the most basic and 
+also has a significant impact on organizations, when dealing with big data security 
+challenges.   
+This is because, as I talked about earlier about encryption and access controls, these 
+measures provide a greater security to manage these large volumes of data.  
+Senash: Ok sir, so that’s the end of the questions  
+Mr. Ayesh: Ok Senash so  
+Senash: Yah sir, thank you for participating.  
+Mr. Ayesh Yah Senash, no problem. Thank you.   
+Senash: Thank you sir.   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+--- PAGE 99 ---
+   
+Mr. Ayesh:  
+174  
+  
+    
+  
+  
+--- PAGE 100 ---
+  
+175  
+  
+PROJECT PLAN  
+Gantt chart / Timeline  
+The project Gantt chart and the activities include:   
+ 
+ 
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+--- PAGE 101 ---
+  
+  
+176  
+  
+    
+ 
+ 
+ 
+ 
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  
+  
+  
+
+--- PAGE 102 ---
+  
+177  
+  
+  
+The project tasks in a detailed format are as follows:   
+ 
+ 
+  
+  
+   
+
+--- PAGE 103 ---
+  
+  
+178  
+  
+    
+ 
+ 
+  
+ 
+  
+
+--- PAGE 104 ---
+  
+179  
+  
+ 
+BUDGET PLAN  
+1. Personnel Costs  
+Item  Description  Cost (USD)  
+Student Researcher  6 months of full-time work  
+(stipend)  $0  
+Supervisor Consultation  Honorarium for guidance 
+and reviews  $0 (University supervisor)  
+Subtotal    $0  
+  
+Software & Tools  
+Item  Description  Cost (USD)  
+Python Libraries (Pandas,  
+Plotly, etc.)  Open-source (no cost)  $0  
+Streamlit & Flask Hosting  Free tier (Streamlit  
+Sharing/Heroku)  $0  
+MongoDB Atlas (Database)  Free tier (512MB storage)  $30  
+Subtotal    $30  
+  
+  
+Hardware & Infrastructure  
+  
+  
+
+--- PAGE 105 ---
+  
+  
+180  
+  
+    
+Item  Description  Cost (USD)  
+Laptop/PC for Development  Already available (no cost)  $0  
+Cloud Storage (Backups)  Google Drive (15GB free)  $0  
+Subtotal    $0  
+  
+Data Acquisition  
+Item  Description  Cost (USD)  
+Adidas Sales Dataset  Downloaded from Kaggle  
+(free)  $0  
+Survey Platform (Google  
+Forms)  Free tier  $0  
+Subtotal    $0  
+  
+Travel & Communication  
+Item  Description  Cost (£)  
+Internet Costs  Existing subscription  £0  
+Interview Transportation  Local travel for stakeholder 
+meetings  $5  
+Sharing surveys  Transportation to several 
+organizations to request to  
+fill the survey  $10  
+  
+Miscellaneous  
+Item  Description  Cost (USD)  
+Printing & Documentation  Thesis binding, posters, etc.  $10  
+Contingency Fund  Unforeseen expenses  $50  
+Subtotal    $60  
+  
+Total Estimated Budget: $105  
+  
+--- PAGE 106 ---
+  
+181  
+  
+Justification of Costs:  
+• Personnel: Majority allocated to the researcher’s stipend for 6 months of 
+dedicated work.  
+• Software/Hardware: Open-source tools and free-tier cloud services minimized 
+expenses.  
+• Data: Publicly available datasets (Kaggle) and free survey tools were used.  
+• Contingency: Reserved for unexpected costs (e.g., additional cloud storage, 
+depolyment).  
+  
+Cost-Saving Measures:  
+• Utilized free-tier hosting (Streamlit, MongoDB) and open-source libraries.  
+• Leveraged existing hardware (personal laptop) and internet.  
+• Conducted the interview at a fixed place to reduce travel costs.  
+  
+--- PAGE 107 ---
+ 
+     
+       
+Monitoring the Progress of Final Year Projects    
+Supervisor Log Sheet    
+   
+BSc. (Hons) IT – University of West London, UK    
+   
+                                                                       Project Title:    
+    
+     Big Data Challenges and Mitigation Strategies in organizations: A     Data 
+Driven Analysis with Industry Insights and development of  
+    Sales Dashboard Web App using big data.  
+       
+Name of the Student:    
+Punchawarige Mahisa Senash   
+    
+     
+Name of the Supervisor:    
+   Mr. Ashen Chathuranga   
+
+--- PAGE 108 ---
+ 
+    1        
+     
+       
+  
+   
+*To be filled and signed by the supervisor     
+Minimum 2 meetings per month    
+       
+Meeting     Criteria                               Suggestions                                       Actions                                             Date                     Signature     
+Proposal Stage     
+     
+1.              
+    
+              Project topic approval    The topic is in line with the goals of 
+the program. Make sure you 
+concentrate on both the practical 
+(dashboard creation) and theoretical 
+(Big Data problems) elements.  
+  
+Suggested to reduce the scope of the 
+project.   
+  
+Overall, approved the topic.   
+   Refined scope to balance the 
+research and the implementation   25/03/2025     
+ 
+2.    
+       
+      
+    Project proposal 
+approval    Strong proposal. The proposal was 
+clearly structured with defined aims, 
+objectives, methodology, and tools. 
+The supervisor suggested including 
+more academic references and 
+elaborating on the tools and 
+technologies to be used for 
+dashboard development.  Additional academic sources were 
+included in the literature review.  
+Technologies such as Python, 
+Excel, and Power BI were 
+finalized for implementation.   30/03/2025     
+ 
+
+--- PAGE 109 ---
+ 
+    2    Interim & Final Stage     
+    
+3.    Literature review 
+(Gathered resource 
+documents)   Ensure diversity of sources – include 
+industry reports, whitepapers, and 
+peer-reviewed journals.  Collected and reviewed academic 
+and industry resources on big data 
+security challenges and mitigation 
+strategies along with the a 
+literature review for the 
+development of the dashboard web 
+app   03/04/2025     
+ 
+    
+4.              
+          
+      Literature review  
+(Report)    Supervisor emphasized the need for 
+critical analysis and synthesis of the 
+reviewed literature. Gaps in current 
+research should be clearly identified 
+and aligned with the project focus.  Drafted the literature review 
+section with organized 
+subsections: Big Data  
+characteristics, security challenges, 
+mitigation techniques, and 
+visualization strategies. Gaps 
+related to practical implementation 
+in small-to-medium enterprises 
+highlighted.   07/04/2025  
+  
+ 
+   
+5.              
+    
+           Approach    
+(Users, Input, Output,   
+Technologies Used)    Recommended clearly defining user 
+personas, system inputs (sales data), 
+and expected outputs (dashboards, 
+predictions). Justify technology 
+choices.   Documented system inputs (CSV 
+sales data), defined users (analysts, 
+business users), and outputs 
+(dashboards, predictions). Chose 
+Streamlit for UI, Pandas for data 
+processing, Prophet and Random 
+Forest for ML, and MongoDB for 
+secure login storage. Flask + 
+HTML used to build a custom 
+login page.   10/04/2025     
+ 
+
+--- PAGE 110 ---
+ 
+    3    6.              
+          
+      Project Design    Advised to include architecture 
+diagrams, system flowcharts, and 
+wireframes aligned with project 
+goals and technologies used  Wireframes that matched the 
+technologies and project 
+objectives. UML diagrams were 
+used to design and document the 
+architecture (use case, data flow).   
+   15/04/2025  
+ 
+   
+  
+  
+   Created user interface draft for the 
+login and dashboard of Streamlit.   
+  
+Flask and MongoDB were used to 
+illustrate the backend structure.    
+7.    
+    
+     Implementation  
+(Algorithms, Flow  
+charts, System, etc.)    
+  
+  
+  
+  
+  
+ Implementation (System  
+Development)  Supervisor advised testing ML 
+models and updating flowcharts to 
+reflect the flow of user login, data 
+processing, and visualization  Pandas was used to implement 
+data transformation and 
+preprocessing. created Random 
+Forest for predictive analysis and 
+Prophet-based time-series 
+forecasting. Streamlit dashboard 
+pipeline and ML integration are 
+depicted.   25/04/2025  
+ 
+   
+8.    Ensure system modules (login, 
+dashboard, predictions) are 
+integrated and tested. Debug UI and 
+confirm MongoDB authentication 
+works as intended.    Integrated Streamlit dashboard 
+with backend Flask login module. 
+Connected MongoDB for secure 
+user login. Verified ML model 
+outputs are rendered dynamically 
+on the dashboard.     01/05/2025  
+ 
+   
+    
+
+--- PAGE 111 ---
+ 
+    4    9.    
+       
+     Implementation 
+(Finalization)  Record unit and integration tests, 
+such as those for forecast accuracy, 
+data input handling, and login 
+validation. Add screenshots.  Improved Streamlit responsiveness 
+and enhanced chart style with 
+Seaborn/Matplotlib and Plotly.   
+  
+Improved error handling for 
+incorrect inputs and an improved 
+login experience.   10/05/2025  
+ 
+   
+ 
+10.            
+          
+      Evaluation    
+(Testing evidence)    The supervisor requested that all test 
+cases (both unit and integration) be 
+documented. Stress unforeseen user 
+inputs and edge scenarios.  Compiled comprehensive test logs, 
+including screenshots. (More than  
+50 Test cases)   
+  
+Evaluated the performance and the 
+reliability of the predictive models 
+(MAE, RSME) and the test cases 
+of the dashboard web app.  
+  
+Critical bugs were identified and 
+resolved. Verification steps 
+recorded   14/05/2025  
+ 
+   
+
+--- PAGE 112 ---
+ 
+    5    11.            
+      
+      Conclusion    
+(Result interpretation, 
+Achievement of  
+objectives, Limitations)    
+& Further work    Summarize achievements against 
+objectives. Highlight limitations 
+(e.g., real-time data not used) and 
+propose future enhancements such 
+as Real-time Analytics Integration  Advanced big data mitigation 
+strategies were identified including 
+encryption techniques like AES, 
+tokenization, advanced ML/AI 
+models to mitigate big data 
+challenges.   
+  
+Further, the report conclusion 
+finalized. Included a comparison 
+of objectives vs outcomes, noted 
+limitations, and proposed 
+enhancements like live data and 
+advanced ML models like  
+XGBoost, LSTM neural networks, 
+or ensemble methods to potentially 
+improve forecasting accuracy   26/05/2025  
+  
+ 
+   
+12.    Guidance for the final 
+viva    Supervisor recommended practicing 
+the presentation thoroughly and 
+preparing responses to common 
+academic questions, especially 
+regarding methodology and results.  
+    Prepared PowerPoint slides, 
+rehearsed delivery, and conducted 
+a mock Q&A session.   
+  
+Prepared demo showcasing the  
+Streamlit user interface,  
+Flask/MongoDB login mechanism, 
+and sales forecasts. ready to   28/05/2025  
+     
+ 
+   confidently respond to queries that 
+are conceptual and technical.    
+   
